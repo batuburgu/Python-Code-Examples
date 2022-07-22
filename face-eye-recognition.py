@@ -1,17 +1,19 @@
 import cv2
 import numpy as np
 
+# original and black&white versions of the image
+img = cv2.imread("C:\\Users\\Batu\\Desktop\\smilingpeople.jpg",cv2.IMREAD_COLOR) 
+gray_img = cv2.imread("C:\\Users\\Batu\\Desktop\\smilingpeople.jpg",cv2.IMREAD_GRAYSCALE) 
 
-img = cv2.imread("C:\\Users\\Batu\\Desktop\\smilingpeople.jpg",cv2.IMREAD_COLOR) #original version of the image
-gray_img = cv2.imread("C:\\Users\\Batu\\Desktop\\smilingpeople.jpg",cv2.IMREAD_GRAYSCALE) # black&white version of the image
-
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml") # the object which will be used for detecting faces
-eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml") # the object which will be used for detecting eyes
-smile_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_smile.xml") # the object which will be used for detecting smiles
+#cascades which will be used for detecting faces, eyes and smiles
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml") 
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml") 
+smile_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_smile.xml") 
 
 faces = face_cascade.detectMultiScale(gray_img, 1.41, 5) # detecting location of faces in image
 for (x,y,w,h) in faces:
     cv2.rectangle(img, (x,y), (x+w, y+h), (0,255,0), 1) # drawing a rectangle around each face with green
+    
     roi_gray = gray_img[y: y+h, x: x+w] # getting faces' axises in black-white image
     roi_color = img[y: y+h, x: x+w] # getting faces' axises in original image
 
