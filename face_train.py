@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-#cascade for detecting face
+# cascade for detecting face
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 people = ["Ben Affleck", "Madonna", "Benedict Cumberbatch"]
