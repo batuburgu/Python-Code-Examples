@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-#cascade for detecting face
+# cascade for detecting face
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 people = ["Ben Affleck", "Madonna", "Benedict Cumberbatch"]
@@ -20,7 +20,7 @@ face = face_cascade.detectMultiScale(gray, 1.1, 5)
 for (x,y,w,h) in face:
     face_roi = gray[y:y+h, x:x+w]
 
-    label,confidence = face_recognizer.predict(face_roi) #predicting the owner of the photo
+    label,confidence = face_recognizer.predict(face_roi) # predicting the owner of the photo
     print(f"Label = {people[label]} with a confidence of {confidence}")
 
     cv2.putText(img, str(people[label]), (20,20), cv2.FONT_HERSHEY_COMPLEX, 1.0, (0,255,0), 2)
