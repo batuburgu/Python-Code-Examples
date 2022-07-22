@@ -1,15 +1,19 @@
 import cv2
 import numpy as np
 
+#black-white version of the image
+img = cv2.imread("C:\\Users\\Batu\\Desktop\\chess-board.png",cv2.IMREAD_GRAYSCALE) 
 
-img = cv2.imread("C:\\Users\\Batu\\Desktop\\chess-board.png",cv2.IMREAD_GRAYSCALE) #black-white version of the image
+#finding corners
+corners = cv2.goodFeaturesToTrack(img, 100, 0.5, 10) 
 
-corners = cv2.goodFeaturesToTrack(img, 100, 0.5, 10) #finding corners
-corners = np.int0(corners) # changing np ints to normal ints
+# changing np ints to normal ints
+corners = np.int0(corners) 
 
+# gets the coordinates of corners and draws a circle on each one of them
 for corner in corners:
-    x,y = corner.ravel() # getting the coordinates of corners
-    cv2.circle(img, (x,y), 5, (255,0,0), -1) # drawing a circle on each corner
+    x,y = corner.ravel() 
+    cv2.circle(img, (x,y), 5, (255,0,0), -1) 
 
 
 cv2.imshow("img",img)
