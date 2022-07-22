@@ -1,11 +1,12 @@
 import cv2
 import numpy
 
+# takes the video feed
 cap = cv2.VideoCapture(0)
 
 while True:
-    ret,frame = cap.read() #reads the image coming from camera
-    frame = cv2.flip(frame,1) #reversing mirror effect
+    ret,frame = cap.read() # reads the image coming from camera
+    frame = cv2.flip(frame,1) # reversing mirror effect
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # making the frame gray
 
     #cascades which will be used for detection of face and eyes
