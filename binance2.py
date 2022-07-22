@@ -9,10 +9,11 @@ driver = webdriver.Chrome("C:\\Users\\Batu\\Desktop\\chromedriver.exe")
 url = "https://www.binance.com/tr/markets" #url of the site
 driver.get(url)
 
-names = [] # stores the names of the coins
-prices = [] # stores the prices of the coins
-changes = [] # stores the values of the price changes in 24 hours
-market_values = [] # stores markets values of the coins
+# variables which will store names, prices, price changes and market values
+names = [] 
+prices = [] 
+changes = [] 
+market_values = []
 
 wb = load_workbook("C:\\Users\\Batu\\Desktop\\Crypto Currencies.xlsx")# the excel file
 ws = wb.active
@@ -38,20 +39,19 @@ for i in range(8):
     values = driver.find_elements(By.CLASS_NAME, "css-s779xv") # finds market values   
     driver.implicitly_wait(2)
 
+    #appending the data collected from site to relevant lists
     for name in coin_names:
-        names.append(name.text) # fills the names list with the names of coins
-
+        names.append(name.text)
     for price in coin_prices:
-        prices.append(price.text) # fills the prices list with the prices of coins
-
+        prices.append(price.text)
     for value in values:
-        market_values.append(value.text) # fills the market_values lists with the market values of coins
-
+        market_values.append(value.text) 
     for change in price_changes:
-        changes.append(change.text) # fills changes list with the changes in prices of coins in the last 24 hours
+        changes.append(change.text) 
 
+    # writes the necessary info to excel row by row
     for row in range(2,len(names)+2):
-        ws.append([names[row-2],prices[row-2],changes[row-2],market_values[row-2]]) # writes the necessary info to excel row by row
+        ws.append([names[row-2],prices[row-2],changes[row-2],market_values[row-2]]) 
   
     #clears all lists for going to next page
     names.clear() 
@@ -59,7 +59,8 @@ for i in range(8):
     changes.clear()
     market_values.clear()
 
-    if(i != 8): # goes to next page if it exists
+    # goes to next page if it exists
+    if(i != 8): 
         next_page_button = driver.find_element(By.XPATH, "//*[@aria-label ='Next page']")
 
         driver.implicitly_wait(2)
