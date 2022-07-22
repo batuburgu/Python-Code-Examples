@@ -1,10 +1,11 @@
 import cv2
 
+# gets the video
+cap = cv2.VideoCapture("C:\\Users\\Batu\\Desktop\\video.mp4") 
 
-cap = cv2.VideoCapture("C:\\Users\\Batu\\Desktop\\video.mp4") # gets the video
-
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml") # the object which will be used for detecting the face
-eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml") # the object which will be used for detecting eyes
+# cascades which will be used for detecting faces and eyes
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml") 
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml") 
 
 while True:
     ret,frame = cap.read() #gets the frame in the video
@@ -14,6 +15,7 @@ while True:
     faces = face_cascade.detectMultiScale(gray_frame,1.3,3) # finds the face
     for (x,y,w,h) in faces:
         cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 1) # drawing a rectangle around the face with green
+        
         roi_gray = gray_frame[y: y+h, x: x+w] # getting face's axises in black-white image
         roi_color = frame[y: y+h, x: x+w] # getting faces' axises in original image
 
